@@ -19,11 +19,26 @@ map("n", ";", ":", { desc = "CMD enter command mode" })
 map("n", "<leader>sv", "<cmd>vsplit<CR>", { desc = "Vertical split" })
 map("n", "<leader>sh", "<cmd>split<CR>", { desc = "Horizontal split" })
 
--- rename vars
--- map('n', "<leader>rn", vim.lsp.buf.rename)
+-- Move cursor up 5 lines and center screen
+map("n", "<S-Up>", function()
+  vim.cmd("normal! 5kzz")
+end, { desc = "Move cursor up 5 lines and center" })
 
--- vim.keymap.del("n", "<leader>ra")
--- vim.keymap.set("n", "<leader>rv", require("nvchad.lsp.renamer"), { desc = "NvRenamer" })
+-- Move cursor down 5 lines and center screen
+map("n", "<S-Down>", function()
+  vim.cmd("normal! 5jzz")
+end, { desc = "Move cursor down 5 lines and center" })
+-- Move cursor up 5 lines in visual mode and center screen
+map("v", "<S-Up>", function()
+  vim.cmd("normal! 5k")
+  vim.cmd("normal! gvzz")  -- reselect visual area and center
+end, { desc = "Move selection up 5 lines and center" })
+
+-- Move cursor down 5 lines in visual mode and center screen
+map("v", "<S-Down>", function()
+  vim.cmd("normal! 5j")
+  vim.cmd("normal! gvzz")  -- reselect visual area and center
+end, { desc = "Move selection down 5 lines and center" })
 
 -- Navigate splits
 map("n", "<C-h>", "<C-w>h", { desc = "Go left split" })
