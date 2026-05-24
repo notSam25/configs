@@ -7,25 +7,49 @@ local function lsp_keymaps(client, bufnr)
 
   vim.keymap.set("n", "gd", vim.lsp.buf.definition, vim.tbl_extend("force", opts, { desc = "Go to definition" }))
   vim.keymap.set("n", "gD", vim.lsp.buf.declaration, vim.tbl_extend("force", opts, { desc = "Go to declaration" }))
-  vim.keymap.set("n", "<leader>vt", vim.lsp.buf.type_definition, vim.tbl_extend("force", opts, { desc = "View type definition" }))
+  vim.keymap.set("n", "<leader>vt", vim.lsp.buf.type_definition,
+    vim.tbl_extend("force", opts, { desc = "View type definition" }))
   vim.keymap.set("n", "<leader>vr", vim.lsp.buf.references, vim.tbl_extend("force", opts, { desc = "View references" }))
   vim.keymap.set("n", "K", vim.lsp.buf.hover, vim.tbl_extend("force", opts, { desc = "Hover documentation" }))
 
-  vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, vim.tbl_extend("force", opts, { desc = "View diagnostics" }))
-  vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, vim.tbl_extend("force", opts, { desc = "Go to previous diagnostic" }))
+  vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float,
+    vim.tbl_extend("force", opts, { desc = "View diagnostics" }))
+  vim.keymap.set("n", "[d", vim.diagnostic.goto_prev,
+    vim.tbl_extend("force", opts, { desc = "Go to previous diagnostic" }))
   vim.keymap.set("n", "]d", vim.diagnostic.goto_next, vim.tbl_extend("force", opts, { desc = "Go to next diagnostic" }))
 
   vim.keymap.set("n", "<leader>va", vim.lsp.buf.code_action, vim.tbl_extend("force", opts, { desc = "Code action" }))
-  vim.keymap.set("n", "<leader>vrn", require("nvchad.lsp.renamer"), vim.tbl_extend("force", opts, { desc = "Rename symbol" }))
+  vim.keymap.set("n", "<leader>vrn", require("nvchad.lsp.renamer"),
+    vim.tbl_extend("force", opts, { desc = "Rename symbol" }))
   vim.keymap.set("n", "<leader>vf", vim.lsp.buf.format, vim.tbl_extend("force", opts, { desc = "Format buffer" }))
 
   vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, vim.tbl_extend("force", opts, { desc = "Signature Help" }))
   vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, vim.tbl_extend("force", opts, { desc = "Signature Help" }))
 end
 
-vim.lsp.config("*", {
+-- vim.lsp.config("*", {
+--   capabilities = defaults.capabilities,
+--   on_attach = lsp_keymaps,
+-- })
+
+
+vim.lsp.config("lua_ls", {
   capabilities = defaults.capabilities,
   on_attach = lsp_keymaps,
+})
+
+vim.lsp.config("clangd", {
+  capabilities = defaults.capabilities,
+  on_attach = lsp_keymaps,
+})
+
+vim.lsp.config("neocmake", {
+  capabilities = defaults.capabilities,
+  on_attach = lsp_keymaps,
+  
+  init_options = {
+    buildDirectory = "build",
+  },
 })
 
 vim.lsp.config("gopls", {
@@ -40,4 +64,11 @@ vim.lsp.config("gopls", {
   },
 })
 
-vim.lsp.enable({ "gopls", "lua_ls" }) 
+vim.lsp.enable({ "gopls", "lua_ls", "clangd", "neocmake" })
+
+
+    --   clangd
+    --   gopls
+    --   lua-language-server
+    --   neocmakelsp
+    --   stylua
