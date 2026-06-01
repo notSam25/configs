@@ -53,6 +53,7 @@ map("n", "<Esc>", "<cmd>noh<CR>", { desc = "general clear highlights" })
 
 -- FSTree
 map("n", "<leader>e", "<cmd>NvimTreeFocus<CR>", { desc = "nvimtree focus window" })
+map("n", "<leader>r", "<cmd>NvimTreeRefresh<CR>", { desc = "nvimtree focus window refresh" })
 
 -- whichkey
 map("n", "<leader>wK", "<cmd>WhichKey <CR>", { desc = "whichkey all keymaps" })
@@ -72,8 +73,4 @@ end, { desc = "terminal new horizontal term" })
 map("n", "<leader>v", function()
   require("nvchad.term").new { pos = "vsp" }
 end, { desc = "terminal new vertical term" })
-map("n", "<leader>/", "gcc", { desc = "toggle comment", remap = true })
-
-map("n", "<leader>r", function()
-  require("nvim-tree.api").tree.reload()
-end)
+map({'n','v','x'}, "<leader>/", "gcc", { desc = "toggle comment", remap = true })
