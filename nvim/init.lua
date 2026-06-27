@@ -35,3 +35,28 @@ require "autocmds"
 vim.schedule(function()
   require "mappings"
 end)
+
+-- session stuff
+-- init.lua (near the end)
+
+vim.api.nvim_create_user_command("SaveState", function()
+  local session_path = vim.fn.getcwd() .. "/.nvim-session.vim"
+  vim.cmd("mksession! " .. session_path)
+end, { desc = "Save Neovim session into ./.nvim-session.vim" })
+
+vim.api.nvim_create_user_command("LoadState", function()
+  local session_path = vim.fn.getcwd() .. "/.nvim-session.vim"
+  if vim.fn.filereadable(session_path) == 1 then
+    vim.cmd("source " .. session_path)
+  end
+end, { desc = "Load ./.nvim-session.vim session if it exists" })
+
+vim.cmd([[cabbrev qs SaveState]])
+vim.cmd([[cabbrev ql LoadState]])
+
+-- Auto-load on startup (after config/plugin setup)
+-- local session_path = vim.fn.getcwd() .. "/.nvim-session.vim"
+-- if vim.fn.filereadable(session_path) == 1 then
+--   vim.cmd("source " .. session_path)
+-- end
+
