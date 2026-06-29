@@ -3,7 +3,7 @@ local defaults = require("nvchad.configs.lspconfig")
 local function lsp_keymaps(client, bufnr)
   local function opts(desc) return { buffer = bufnr, desc = "LSP " .. desc } end
   -- defaults.on_attach(client, bufnr)
-  
+
   if client.server_capabilities.inlayHintProvider then
     vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
   end
@@ -51,6 +51,21 @@ vim.lsp.config("clangd", {
   on_attach = lsp_keymaps,
 })
 
+vim.lsp.config("ruff", {
+  capabilities = defaults.capabilities,
+  on_attach = lsp_keymaps,
+})
+
+vim.lsp.config("pyright", {
+  capabilities = defaults.capabilities,
+  on_attach = lsp_keymaps,
+})
+
+vim.lsp.config("marksman", {
+  capabilities = defaults.capabilities,
+  on_attach = lsp_keymaps,
+})
+
 vim.lsp.config("neocmake", {
   capabilities = defaults.capabilities,
   on_attach = lsp_keymaps,
@@ -72,4 +87,4 @@ vim.lsp.config("gopls", {
   },
 })
 
-vim.lsp.enable({ "gopls", "lua_ls", "clangd", "neocmake", "cmakelang" })
+vim.lsp.enable({ "marksman", "gopls", "lua_ls", "clangd", "neocmake", "cmakelang", "ruff", "pyright" })

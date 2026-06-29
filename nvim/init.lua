@@ -22,6 +22,14 @@ require("lazy").setup({
     import = "nvchad.plugins",
   },
 
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    ft = { "markdown", "md" },
+    config = function()
+      require("render-markdown").setup({})
+    end,
+  },
+
   { import = "plugins" },
 }, lazy_config)
 
@@ -59,4 +67,3 @@ vim.cmd([[cabbrev ql LoadState]])
 -- if vim.fn.filereadable(session_path) == 1 then
 --   vim.cmd("source " .. session_path)
 -- end
-
