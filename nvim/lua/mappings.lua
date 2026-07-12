@@ -23,12 +23,12 @@ map("n", "<leader>sv", "<cmd>vsplit<CR>", { desc = "Vertical split" })
 map("n", "<leader>sh", "<cmd>split<CR>", { desc = "Horizontal split" })
 
 -- Move cursor up 5 lines and center screen
-map({"n", "i", "v"}, "<S-Up>", function()
+map({ "n", "i", "v" }, "<S-Up>", function()
   vim.cmd("normal! 5kzz")
 end, { desc = "Move cursor up 5 lines and center" })
 
 -- Move cursor down 5 lines and center screen
-map({"n", "i", "v"}, "<S-Down>", function()
+map({ "n", "i", "v" }, "<S-Down>", function()
   vim.cmd("normal! 5jzz")
 end, { desc = "Move cursor down 5 lines and center" })
 
@@ -62,4 +62,15 @@ end, { desc = "terminal new horizontal term" })
 map("n", "<leader>v", function()
   require("nvchad.term").new { pos = "vsp" }
 end, { desc = "terminal new vertical term" })
-map({'n','v','x'}, "<leader>/", "gcc", { desc = "toggle comment", remap = true })
+map({ 'n', 'v', 'x' }, "<leader>/", "gcc", { desc = "toggle comment", remap = true })
+
+-- Debugging stuff
+local dap = require("dap")
+local dapui = require("dapui")
+
+map("n", "<F5>", dap.continue)
+map("n", "<F10>", dap.step_over)
+map("n", "<F11>", dap.step_into)
+map("n", "<F12>", dap.step_out)
+
+map("n", "<Leader>du", dapui.toggle)
