@@ -1,4 +1,34 @@
 return {
+  {
+    "nvim-telescope/telescope.nvim",
+    opts = {
+      pickers = {
+        find_files = {
+          hidden = true,
+          no_ignore = true,
+          find_command = {
+            "rg",
+            "--files",
+            "--hidden",
+            "--no-ignore",
+            "--glob",
+            "!.git",
+            "--glob",
+            "!node_modules",
+          },
+        },
+      },
+    },
+  },
+  {
+    "nvim-tree/nvim-tree.lua",
+    opts = {
+      filters = {
+        dotfiles = false,
+        git_ignored = false,
+      },
+    },
+  },
   require "plugins.debugger",
   {
     "stevearc/conform.nvim",
