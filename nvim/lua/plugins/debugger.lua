@@ -31,6 +31,16 @@ return {
     },
   },
   {
+    -- usefull commands https://github.com/lervag/vimtex/blob/master/test/example-quick-start/main.tex
+    "lervag/vimtex",
+    lazy = false,  -- we don't want to lazy load VimTeX
+    tag = "v2.17", -- uncomment to pin to a specific release
+    init = function()
+      vim.g.vimtex_view_general_viewer = 'okular'
+      vim.g.vimtex_view_general_options = '--unique file:@pdf#src:@line@tex'
+    end
+  },
+  {
     "mfussenegger/nvim-dap",
     config = function()
       local dap = require("dap")
@@ -53,6 +63,13 @@ return {
           program = function()
             return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
           end,
+          setupCommands = {
+            {
+              text = "set output-radix 16",
+              description = "Use hex for integers",
+              ignoreFailures = false,
+            },
+          },
           cwd = "${workspaceFolder}",
           stopAtBeginningOfMainSubprogram = false,
         },

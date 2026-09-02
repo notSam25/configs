@@ -21,7 +21,6 @@ require("lazy").setup({
     branch = "v2.5",
     import = "nvchad.plugins",
   },
-
   {
     "MeanderingProgrammer/render-markdown.nvim",
     ft = { "markdown", "md" },
@@ -29,7 +28,6 @@ require("lazy").setup({
       require("render-markdown").setup({})
     end,
   },
-
   { import = "plugins" },
 }, lazy_config)
 
